@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Student</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles2.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Add Student</h1>
+
+        <!-- Form for manual entry -->
+        <form class="form" method="post" action="{{ url_for('add_student') }}">
+            <label for="manual_student_id">ID:</label>
+            <input type="text" id="manual_student_id" name="manual_student_id" required>
+
+            <label for="manual_student_name">Name:</label>
+            <input type="text" id="manual_student_name" name="manual_student_name" required>
+
+            <button type="submit">Add Manually</button>
+        </form>
+
+        <div class="separator">OR</div>
+
+        <!-- Form for file upload -->
+        <form class="form" method="post" action="{{ url_for('add_student') }}" enctype="multipart/form-data">
+            <label for="file">Upload File:</label>
+            <input type="file" id="file" name="file" accept=".xlsx, .xls, .csv" required>
+
+            <button type="submit">Upload File</button>
+        </form>
+    </div>
+</body>
+</html>

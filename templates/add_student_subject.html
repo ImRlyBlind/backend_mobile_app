@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Student Page</title>
+</head>
+<body>
+    <h1> What's Subject and How many students ? </h1>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles4.css') }}">
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+
+    <form method="post" action="{{ url_for('add_student_subject') }}" enctype="multipart/form-data">
+        <label for="subject">Subject Name:</label>
+        <input type="text" id="subject" name="subject" required>
+
+        <label for="file">Upload File:</label>
+        <input type="file" id="file" name="file" accept=".xlsx, .xls, .csv" required>
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
