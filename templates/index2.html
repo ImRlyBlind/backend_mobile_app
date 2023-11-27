@@ -10,6 +10,7 @@
         body {
             font-family: 'Arial', sans-serif;
             margin: 20px;
+            background-color: #f4f4f4;
         }
 
         h1 {
@@ -22,6 +23,7 @@
             border-collapse: collapse;
             margin-top: 20px;
             border: 2px solid #ddd;
+            background-color: #fff;
         }
 
         th, td {
@@ -77,7 +79,26 @@
             cursor: pointer;
         }
         .top-right {
-            float: right
+            color: #fff;
+            float: right;
+            cursor: pointer;
+            background-color: rgb(100, 100, 100)
+        }
+        .primary-button {
+            background-color: rgb(80, 185, 52);
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .secondary-button {
+            background-color: #ccc;
+            color: #333;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
 
     </style>
@@ -183,16 +204,16 @@
 <div class="header">
     <div class="top-right">
         {% if 'username' in session %}
-            <button onclick="logoutConfirm()">Logout</button>
+        <button class="top-right" onclick="logoutConfirm()">Logout</button>
         {% endif %}
     </div>
 </div>
 <h2> Subject: {{ subject_name }} </h2>
 <h3> Total Students: {{ num_students }} </h3>
- <a href="{{ url_for('add_student') }}" style="float: right; margin-right: 20px;">Add Student</a>
+<a href="{{ url_for('add_student') }}" style="float: right; margin-right: 20px;">Add Student</a>
 <select id="numStudentsDropdown" onchange="filterByNumStudents()">
     {% for num in student_ids %}
-        <option value="{{ num }}">{{ num }}</option>
+    <option value="{{ num }}">{{ num }}</option>
     {% endfor %}
 </select>
 
@@ -203,11 +224,11 @@
     <option value="id">ID</option>
 </select>
 <button onclick="clearSearch()">Clear Search</button>
-<button onclick="filterResult('Pass')">Filter Pass</button>
-<button onclick="filterResult('Not Pass')">Filter Not Pass</button>
-<button onclick="filterResult('None')">Filter None</button>
-<button onclick="clearFilter()">Clear Filters</button>
-
+<button class="primary-button" onclick="filterResult('Pass')">Filter Pass</button>
+<button class="secondary-button" onclick="filterResult('Not Pass')">Filter Not Pass</button>
+<button class="secondary-button" onclick="filterResult('None')">Filter None</button>
+<button class="secondary-button" onclick="clearFilter()">Clear Filters</button>
+<p> *You can click at picture to view in full picture </p>
 <table id="dataTable" border="1">
     <tr>
         <th> ID</th>
@@ -219,15 +240,15 @@
     {% for row in data %}
     <tr>
         {% for value in row %}
-            {% if loop.index0 == 2 or loop.index0 == 4 %}
-            <td>
-                <img src="{{value}}" alt="" width="500" height="333" onclick="openModal(this.src)">
-            </td>
-            {% else %}
-            <td>
-                {{ value }}
-            </td>
-            {% endif %}
+        {% if loop.index0 == 2 or loop.index0 == 4 %}
+        <td>
+            <img src="{{value}}" alt="" width="500" height="333" onclick="openModal(this.src)">
+        </td>
+        {% else %}
+        <td>
+            {{ value }}
+        </td>
+        {% endif %}
         {% endfor %}
         <td>
             <a href="{{ url_for('delete_confirm', id=row[0]) }}"> Delete </a>

@@ -112,6 +112,7 @@ def add_student_subject():
         if request.method == 'POST':
 
             subject_name = request.form['subject']
+            session['subject_name'] = subject_name
 
             if 'file' in request.files:
                 file = request.files['file']
