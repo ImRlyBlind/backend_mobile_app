@@ -5,3 +5,4 @@
 This project use MySQL db.
 You can download the pre-trained weight model from this link
 https://github.com/ayoolaolafenwa/PixelLib/blob/master/Tutorials/Pytorch_image_instance_segmentation.md
+Keep .html file in folder templates and .css in static
