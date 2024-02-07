@@ -134,7 +134,7 @@ def add_student_subject():
 
                         print("number ", num_students)
                         print("List of Students:", students)
-                        return redirect(url_for('view'))
+                        return redirect(url_for('dashboard'))
                     else:
                         error_message = 'Please upload a valid Excel (.xlsx) or CSV (.csv) file.'
                         return render_template('add_student_subject.html', error=error_message)
@@ -340,6 +340,34 @@ def edit_student(id):
 def logout():
     session.pop('username', None)
     return redirect(url_for('login'))
+
+@app.route("/dashboard")
+def dashboard():
+
+    if 'username' in session:
+        connection = mysql.connector.connect(**db_config)
+        cur = connection.cursor()
+
+        cur.execute("SELECT id, name, picture, result, picture_result FROM app_rec")
+        student = [{'id':sid, 'name':name, 'picture':picture, "result":result, "pic_result":pic_result} for sid, name, picture, result, pic_result in cur.fetchall()]
+
+        cur.execute("SELECT id, name, picture, result FROM app_rec WHERE picture IS NULL OR picture = ''")
+        student_without_photo = [{'id': sid, 'name': name, 'picture': picture, 'result': result}
+                                  for sid, name, picture, result in cur.fetchall()]
+
+        num_with_photo = sum(1 for st in student if st['picture'])
+        num_without_photo = sum(1 for st in student if not st['picture'])
+
+        number_students = num_with_photo + num_with_photo
+
+        number_students = len(student)
+        print(number_students)
+        cur.close()
+        connection.close()
+        return render_template("dashboard.html", student=student, num_students=number_students, with_photo=num_with_photo, without_photo=num_without_photo, st_without_photo= student_without_photo)
+
+    else:
+        redirect(url_for('login'))
 
 if __name__ == '__main__':
     app.run(debug=True)

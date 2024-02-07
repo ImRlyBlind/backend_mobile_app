@@ -1,0 +1,294 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+main {
+    padding: 20px;
+}
+
+.card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.card h2 {
+    color: #333;
+}
+
+.chart-container {
+    margin-top: 20px;
+}
+
+.dashboard-container {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-container h2 {
+    color: #333;
+}
+
+.student-info {
+    border-bottom: 1px solid #ddd;
+    padding: 20px 0;
+    display: flex;
+    align-items: center;
+}
+
+.student-info img {
+    width: 100%;
+    height: auto;
+    margin-right: 20px;
+}
+
+.student-info .info-container {
+    flex-grow: 1;
+}
+
+.student-info p {
+    color: #333;
+    margin: 5px 0; /* Add margin for better spacing */
+}
+
+.student-info .result {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.dropdown-btn {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+.toggle-all-btn {
+    text-decoration: none; /* Remove underline */
+    cursor: pointer;
+}
+
+.show {
+    display: block;
+}
+
+.info-container {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+.student-info {
+    margin-bottom: 10px;
+}
+
+.info-container .result {
+    flex: 1;
+    text-align: right;
+}
+
+.info-container.with-photo .row {
+    display: flex;
+    align-items: center;
+}
+
+.info-container .column {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.info-container .column:last-child {
+    margin-right: 0;
+}
+
+.without-photo,
+.with-photo {
+    display: none;
+}
+
+.student-details {
+    margin-right: 20px;
+}
+
+.student-photo img {
+    display: block;
+}
+
+.show {
+    display: block;
+}
+
+.dashboard-container a {
+    display: block;
+    background-color: #555;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.dashboard-container a:hover {
+    background-color: #333;
+}
+
+.nav-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu-list {
+    list-style: none;
+    display: flex;
+}
+
+.menu-list li {
+    margin-right: 15px;
+}
+
+.logout {
+    margin-left: 1000px; /* This pushes the "Logout" item to the right */
+}
+
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.menu-toggle span {
+    background-color: #fff;
+    display: block;
+    height: 3px;
+    width: 25px;
+    margin: 5px 0;
+    transition: background-color 0.3s ease;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 50px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: auto;
+}
+
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+
+@media screen and (max-width: 768px) {
+    .menu-list {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background-color: #333;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-menu.show .menu-list {
+        display: flex;
+    }
+
+    .logout {
+        margin-left: 0; /* Reset margin for smaller screens */
+        margin-top: 20px; /* Add some top margin for separation */
+    }
+
+    .menu-list li {
+        margin: 0;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+}

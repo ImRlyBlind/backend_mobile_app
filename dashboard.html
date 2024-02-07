@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles5.css') }}">
+</head>
+<body>
+<header class="app-bar">
+    <nav class="nav-menu">
+        <div class="menu-toggle" id="mobile-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul class="menu-list">
+            <li><a href="{{ url_for('dashboard') }}">Home</a></li>
+            <li><a href="{{ url_for('view') }}">View Students</a></li>
+            <li><a href="{{ url_for('add_student') }}">Add Students</a></li>
+
+        </ul>
+        <a class="logout" href="{{ url_for('logout') }}">Logout</a></li>
+    </nav>
+</header>
+<script>
+    function openModal(imageUrl) {
+        document.getElementById('fullImage').src = imageUrl;
+        document.getElementById('imageModal').style.display = 'block';
+    }
+
+    function closeModal() {
+        document.getElementById('imageModal').style.display = 'none';
+    }
+    function toggleDropdowns(type) {
+
+        var selector = '.' + (type === 'without-photo' ? 'without-photo' : 'with-photo');
+        var dropdowns = document.querySelectorAll(selector);
+
+        dropdowns.forEach(function (dropdown) {
+            dropdown.classList.toggle('show', !dropdown.classList.contains('show'));
+        });
+    }
+    function viewResultPicture(resultPicture) {
+        if (resultPicture) {
+
+            openModal(resultPicture);
+        }
+    }
+
+</script>
+
+<main>
+    <div class="dashboard-container">
+        <h2>Welcome to the Dashboard, {{ session.username }}!</h2>
+        <h2> Total Students: {{ num_students }} </h2>
+
+        <div class="dashboard-item">
+            <h3> Haven't taken photo: {{ without_photo }} </h3>
+        </div>
+        <div class="dashboard-item">
+            <h3>Students Without Photos:</h3>
+            <ul>
+                {% for student_id in students_without_photos %}
+                <li>{{ student_id }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <button class="toggle-without-photo-btn" onclick="toggleDropdowns('without-photo')"> Details</button>
+        {% for st in st_without_photo %}
+        <div class="student-info">
+            <div class="info-container without-photo" id="without-photo-dropdown-{{ st.id }}">
+                <p>ID: {{ st.id }}</p>
+                <p>Name: {{ st.name }}</p>
+
+                {% if st.picture %}
+                <img src="{{ student.picture }}" alt="Student Photo">
+                {% else %}
+                <p>Haven't taken a photo yet</p>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+
+        <div class="dashboard-item">
+            <h3> Have taken photo: {{ with_photo }} </h3>
+        </div>
+        <h2>Students With Photo</h2>
+        <p> You can click at result to view picture detail </p>
+        <button class="toggle-with-photo-btn" onclick="toggleDropdowns('with-photo')"> Details</button>
+        {% for st in student %}
+        {% if st.picture %}
+        <div class="student-info">
+            <div class="info-container with-photo" id="with-photo-dropdown-{{ st.id }}">
+                <div class="row">
+                    <div class="column">
+                        <p>ID: {{ st.id }}</p>
+                        <p>Name: {{ st.name }}</p>
+                    </div>
+
+                    {% if st.picture %}
+                    <div class="column">
+                        <img src="{{ st.picture }}" alt="Student Photo" width="720" height="1280"
+                             onclick="openModal(this.src)">
+                    </div>
+                    {% endif %}
+                    <div class="result" onclick="viewResultPicture('{{st.pic_result}}')">
+                        {% if st.result %}
+                        <p>Result: {{ st.result }}</p>
+                        {% else %}
+                        <p>No result available</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+
+    </div>
+</main>
+<div id="imageModal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="fullImage">
+</div>
+</body>
+</html>
